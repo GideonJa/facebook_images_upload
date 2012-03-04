@@ -12,13 +12,14 @@ class ServicesController < ApplicationController
             :oauth_token => auth['credentials']['token'],
             :oauth_token_secret => auth['credentials']['secret'],
           )
-      redirect_to photos_path, :notice => t('flash_new_service', :provider => provider.displayed_name)
+      redirect_to event_path(current_user.events.first.id)
   end
 
   def destroy
     @service = current_user.services.find(params[:id])
+    provider = @service.provider
     @service.destroy if @service
-      redirect_to photos_path, :notice => t('flash_service_deleted', :provider => provider.displayed_name)
+      redirect_to event_path(current_user.events.first.id)
   end
 
 

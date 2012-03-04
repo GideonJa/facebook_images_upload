@@ -5,7 +5,7 @@
   <% Provider.find(:all, :order=>'name').each do |p| %>
     <% s = current_user.services.find_by_provider_id(p.id) %>
     <% if s %>
-      <li>[<%= link_to 'x', s, :confirm => t('.confirm_remove_service'), :method => :delete %>] <%= p.name %>
+      <li>[<%= link_to 'x', s, :confirm => t('.confirm_remove_service'), :method => :delete %>] <%=t ".#{p.name}" %>
     <% else %>
       <% unauthorized_providers << p %>
     <% end %>
