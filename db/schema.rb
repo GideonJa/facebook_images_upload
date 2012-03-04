@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304094343) do
+ActiveRecord::Schema.define(:version => 20120304114126) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -24,18 +24,18 @@ ActiveRecord::Schema.define(:version => 20120304094343) do
 
   create_table "photos", :force => true do |t|
     t.integer  "event_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.integer  "service_provider_id"
+    t.integer  "service_id"
   end
 
   add_index "photos", ["event_id"], :name => "index_photos_on_event_id"
 
-  create_table "service_providers", :force => true do |t|
+  create_table "providers", :force => true do |t|
     t.string   "name"
     t.integer  "order"
     t.string   "consumer_key"
@@ -46,17 +46,17 @@ ActiveRecord::Schema.define(:version => 20120304094343) do
 
   create_table "services", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "service_provider_id"
+    t.integer  "provider_id"
     t.string   "uid"
     t.string   "name"
     t.string   "oauth_token"
     t.string   "oauth_token_secret"
     t.string   "description"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
-  add_index "services", ["service_provider_id"], :name => "index_services_on_service_provider_id"
+  add_index "services", ["provider_id"], :name => "index_services_on_service_provider_id"
   add_index "services", ["user_id"], :name => "index_services_on_user_id"
 
   create_table "users", :force => true do |t|

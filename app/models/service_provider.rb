@@ -1,2 +1,2 @@
-class ServiceProvider < ActiveRecord::Base
+class Provider < ActiveRecord::Base
 end
