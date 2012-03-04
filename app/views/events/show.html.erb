@@ -1,0 +1,12 @@
+<h1><%= @event.name %></h1>
+<div id="photos">
+  <% if @photos %>
+    <ul>
+    <% @photos.each do |photo| %>
+      <li><%= photo.file_file_name %></li>
+    <% end %>
+    </ul>
+  <% else %>
+    There are no photos yet
+  <% end %>
+</div>
