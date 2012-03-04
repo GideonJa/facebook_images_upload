@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304093102) do
+ActiveRecord::Schema.define(:version => 20120304093822) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(:version => 20120304093102) do
   end
 
   add_index "photos", ["event_id"], :name => "index_photos_on_event_id"
+
+  create_table "service_providers", :force => true do |t|
+    t.string   "name"
+    t.integer  "order"
+    t.string   "consumer_key"
+    t.string   "consumer_secret"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
