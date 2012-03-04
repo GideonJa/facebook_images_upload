@@ -1,0 +1,22 @@
+<div id="services">
+<% unauthorized_providers = [] %>
+  <h2><%=t '.services' %></h2>
+  <ul>
+  <% Provider.find(:all, :order=>'name').each do |p| %>
+    <% s = current_user.services.find_by_provider_id(p.id) %>
+    <% if s %>
+      <li>[<%= link_to 'x', s, :confirm => t('.confirm_remove_service'), :method => :delete %>] <%= p.name %>
+    <% else %>
+      <% unauthorized_providers << p %>
+    <% end %>
+  <% end %>
+  </ul>
+<% if unauthorized_providers.size > 0 %>
+  <h2><%=t '.add_service' %></h2>
+  <ul>
+  <% unauthorized_providers.each do |p| %>
+    <li><%= link_to t(".#{p.name}"), "/auth/#{p.name}" %>
+  <% end %>
+  </ul>
+<% end %>
+</div>
