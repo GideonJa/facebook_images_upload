@@ -7,6 +7,7 @@ gem 'rails', '3.2.2'
 
 gem 'sqlite3'
 gem "paperclip", "~> 2.7.0"
+gem "omniauth", "~> 1.0.2"
 
 # Gems used only for assets and not required
 # in production environments by default.
