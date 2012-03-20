@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore ImageMagick images
+/public/system
+
+# Ignore Mac files
+.DS_Store

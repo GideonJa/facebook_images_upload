@@ -5,5 +5,6 @@ FacebookImagesUpload::Application.routes.draw do
 
   resources :services
   
-  match "auth/:provider/callback" => "services#create"
+  match "/auth/:provider/callback" => "services#create"
+  match "/import/:provider" => "services#import", :as => :import
 end

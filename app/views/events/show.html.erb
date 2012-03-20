@@ -5,7 +5,7 @@
   <% if @photos %>
     <ul>
     <% @photos.each do |photo| %>
-      <li><%= photo.file_file_name %></li>
+      <li><%= image_tag photo.file.url %></li>
     <% end %>
     </ul>
   <% else %>

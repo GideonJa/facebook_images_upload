@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304114126) do
+ActiveRecord::Schema.define(:version => 20120312093244) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -31,9 +31,14 @@ ActiveRecord::Schema.define(:version => 20120304114126) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.integer  "service_id"
+    t.text     "metadata"
+    t.string   "provider_uid"
+    t.integer  "user_id"
   end
 
   add_index "photos", ["event_id"], :name => "index_photos_on_event_id"
+  add_index "photos", ["service_id", "provider_uid"], :name => "index_photos_on_service_id_and_provider_uid"
+  add_index "photos", ["user_id"], :name => "index_photos_on_user_id"
 
   create_table "providers", :force => true do |t|
     t.string   "name"
