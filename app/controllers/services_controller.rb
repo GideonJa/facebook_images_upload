@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class ServicesController < ApplicationController
 
   protect_from_forgery :except => :create
@@ -28,25 +26,11 @@ class ServicesController < ApplicationController
     @service = current_user.services.find_by_provider_id(@provider.id)
     @uncategorized_event = current_user.events.first #TODO: find uncategorized
 
-    photos_added = 0
     if @provider.name == 'facebook'
-      api = Koala::Facebook::API.new(@service.oauth_token)
-      api.get_connections('me', 'albums').each do |album|
-        api.get_connections(album['id'], 'photos').each do |photo|
-          unless current_user.photos.find_by_service_id_and_provider_uid(@service.id, photo['id'])
-            current_user.photos.create(
-              :event_id => @uncategorized_event.id,
-              :service_id => @service.id,
-              :provider_uid => photo['id'],
-              :metadata => {'album' => album, 'photo' => photo},
-              :file => open(photo['source']) )
-            photos_added += 1
-          end
-        end
-      end
+      Resque.enqueue(FacebookImporter, @service.id)
     end
 
-    redirect_to @uncategorized_event, :notice => t('flash_notice_photos_imported', :count => photos_added)
+    redirect_to @uncategorized_event, :notice => t('flash_notice_photos_imported', :count => 1)
   end
 
 end

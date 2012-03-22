@@ -10,6 +10,7 @@ gem "paperclip", "~> 2.7.0"
 gem "omniauth", "~> 1.0.2"
 gem 'omniauth-facebook'
 gem 'koala'
+gem 'resque', :require => "resque/server"
 
 # Gems used only for assets and not required
 # in production environments by default.
