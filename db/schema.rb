@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312093244) do
+ActiveRecord::Schema.define(:version => 20120326111159) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -57,8 +57,12 @@ ActiveRecord::Schema.define(:version => 20120312093244) do
     t.string   "oauth_token"
     t.string   "oauth_token_secret"
     t.string   "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.datetime "import_started_at"
+    t.datetime "import_ended_at"
+    t.integer  "import_total_photos"
+    t.integer  "import_num_photos"
   end
 
   add_index "services", ["provider_id"], :name => "index_services_on_service_provider_id"
