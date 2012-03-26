@@ -3,10 +3,10 @@
 
 en:
   
-  flash_notice_photos_imported:
-    zero: "No more photos were imported."
-    one: "One photo was imported."
-    other: "%{count} photos were imported."
+  # flash_notice_photos_imported:
+  #   zero: "No more photos were imported."
+  #   one: "One photo was imported."
+  #   other: "%{count} photos were imported."
   services:
     list:
       services: "Services"

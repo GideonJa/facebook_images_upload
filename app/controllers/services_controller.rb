@@ -27,10 +27,10 @@ class ServicesController < ApplicationController
     @uncategorized_event = current_user.events.first #TODO: find uncategorized
 
     if @provider.name == 'facebook'
-      Resque.enqueue(FacebookImporter, @service.id)
+      Resque.enqueue(FacebookImporter, @service.id) if !@service.import_started_at
     end
 
-    redirect_to @uncategorized_event, :notice => t('flash_notice_photos_imported', :count => 1)
+    redirect_to @uncategorized_event
   end
 
 end

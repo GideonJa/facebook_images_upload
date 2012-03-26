@@ -5,6 +5,7 @@ class FacebookImporter
   
   def self.perform(service_id)
     service = Service.find(service_id)
+    service.update_attribute :import_started_at, Time.now
     user = User.find(service.user_id)
     api = Koala::Facebook::API.new(service.oauth_token)
     api.get_connections('me', 'albums').each do |album|
@@ -19,6 +20,7 @@ class FacebookImporter
         end
       end
     end    
+    service.update_attribute :import_ended_at, Time.now
   end
   
 end
