@@ -1,0 +1,10 @@
+<% current_user.services.each do |service| %>
+  <% if service.import_started_at %>
+    <div id="service_<%= service.id %>_import_status" class="notice">
+      <%= render :partial => 'services/import_message', :locals => {:service => service} %>
+    </div>
+    <script>
+      setTimeout(function() {update_import_status(<%= service.id %>);}, 3000);
+    </script>
+  <% end %>
+<% end %>

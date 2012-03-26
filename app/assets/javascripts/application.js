@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var update_import_status = function(service_id) {
+  $.ajax( '/services/' + service_id + '/import_status' );
+};

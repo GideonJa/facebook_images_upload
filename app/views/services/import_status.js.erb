@@ -1,0 +1,11 @@
+$('#service_<%= @service.id %>_import_status').html('<%=escape_javascript(render(:partial => "services/import_message", :locals => {:service=>@service})) %>');
+<% if @service.import_ended_at %>
+  setTimeout(function() {$('#service_<%= @service.id %>_import_status').fadeOut();}, 30000)
+  <% @service.update_attributes( 
+      :import_started_at => nil,
+      :import_ended_at => nil,
+      :import_num_photos => nil,
+      :import_total_photos => nil ) %>
+<% else %>
+  setTimeout(function() {update_import_status(<%= @service.id %>);}, 3000);
+<% end %>

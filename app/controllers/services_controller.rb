@@ -26,11 +26,21 @@ class ServicesController < ApplicationController
     @service = current_user.services.find_by_provider_id(@provider.id)
     @uncategorized_event = current_user.events.first #TODO: find uncategorized
 
-    if @provider.name == 'facebook'
-      Resque.enqueue(FacebookImporter, @service.id) if !@service.import_started_at
+    unless @service.import_started_at
+      @service.update_attribute :import_started_at, Time.now
+      if @provider.name == 'facebook'
+        Resque.enqueue(FacebookImporter, @service.id) 
+      end
     end
 
     redirect_to @uncategorized_event
   end
 
+  def import_status
+    @service = current_user.services.find(params[:service_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 end

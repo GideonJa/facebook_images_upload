@@ -1,0 +1,10 @@
+<% if service.import_ended_at %>
+  <%=t ".#{service.provider.name}_import_ended", :count => service.import_total_photos %>
+  <% if service.import_total_photos != 0 %>
+    <%= link_to t('.go_to_uncategorized'), current_user.events.first %>.
+  <% end %>
+<% elsif service.import_total_photos and service.import_num_photos %>
+  <%=t ".#{service.provider.name}_import_running", :num_photos => service.import_num_photos, :total_photos => service.import_total_photos %>
+<% elsif !service.import_total_photos %>
+  <%=t ".#{service.provider.name}_import_started" %>
+<% end %>

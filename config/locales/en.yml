@@ -14,3 +14,12 @@ en:
       confirm_remove_service: "Are you sure you want to remove this service?"
       facebook: "Facebook"
       flickr: "Flickr"
+    import_message:
+      facebook_import_started: "Starting Facebook import..."
+      facebook_import_running: "Imported %{num_photos} out of %{total_photos} from Facebook..."
+      facebook_import_ended:
+        zero: "Facebook import is done. No new photos were found."
+        one: "Facebook import is done. One photo was imported."
+        other: "Facebook import is done. %{count} photos were imported."
+      go_to_uncategorized: "Reload uncategorized photos"
+      
