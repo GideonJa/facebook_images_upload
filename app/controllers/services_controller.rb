@@ -11,7 +11,7 @@ class ServicesController < ApplicationController
             :uid => auth['uid'],
             :oauth_token => auth['credentials']['token'],
             :oauth_token_secret => auth['credentials']['secret'])
-      redirect_to event_path(current_user.events.first.id)
+      redirect_to import_path(:provider => provider.name)
   end
 
   def destroy
