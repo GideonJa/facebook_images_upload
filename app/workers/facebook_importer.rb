@@ -33,7 +33,9 @@ class FacebookImporter
             service.update_attribute :import_num_photos, num_photos
           end
         end
-      end    
+      end
+      # TODO: change copy and link information:
+      api.put_wall_post("I've just imported photos into PixelMate!", {:name => "Example", :link => "http://www.example.com"})    
     end
     
     service.update_attribute :import_ended_at, Time.now
