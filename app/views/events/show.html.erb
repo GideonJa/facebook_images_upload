@@ -7,7 +7,17 @@
   <% if @photos %>
     <ul>
     <% @photos.each do |photo| %>
-      <li><%= image_tag photo.file.url %></li>
+      <li>
+        <%= image_tag photo.file.url %><br />
+        <% if photo.metadata['photo']['tags'] %>
+          <% tag_names = [] %>
+          <%#= photo.metadata['photo']['tags']['data'] %>
+          <% photo.metadata['photo']['tags']['data'].each do |tag| %>
+            <% tag_names << tag['name'] %>
+          <% end %>
+          <%= tag_names.join(', ') %>
+        <% end %>
+      </li>
     <% end %>
     </ul>
   <% else %>
