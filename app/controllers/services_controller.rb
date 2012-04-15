@@ -42,5 +42,27 @@ class ServicesController < ApplicationController
       format.js
     end
   end
+
+  def chat
+    @provider = Provider.find_by_name(params[:provider])
+    @service = Service.find_by_provider_id_and_uid(@provider.id, params[:uid])
+    if @service
+      render :text => "chat with user=#{@service.user.name}"
+    else
+      redirect_to invite_path(:provider => params[:provider], :uid => params[:uid])
+    end
+
+  end
+  
+  def invite
+    @provider = Provider.find_by_name(params[:provider])
+    @service = Service.find_by_provider_id_and_uid(@provider.id, params[:uid])
+    
+    if @service
+      redirect_to chat_path(:provider => params[:provider], :uid => params[:uid]) if @service
+    else
+      render :text => "invite uid=#{params[:uid]} from #{@provider.name}"
+    end
+  end
   
 end

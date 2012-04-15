@@ -12,9 +12,15 @@
         <% if photo.metadata['photo']['tags'] %>
           <% tag_names = [] %>
           <% photo.metadata['photo']['tags']['data'].each do |tag| %>
-            <% tag_names << tag['name'] %>
+            <% if tag['id'] %>
+              <% tag_names << link_to(tag['name'], 
+                                      chat_path(:provider => photo.service.provider.name,
+                                                :uid => tag['id']) ) %>
+            <% else %>
+              <% tag_names << h(tag['name']) %>
+            <% end %>
           <% end %>
-          <%= tag_names.join(', ') %>
+          <%=raw tag_names.join(', ') %>
         <% end %>
       </li>
     <% end %>

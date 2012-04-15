@@ -8,6 +8,8 @@ FacebookImagesUpload::Application.routes.draw do
   end
   
   match "/auth/:provider/callback" => "services#create"
+  match "/chat/:provider/:uid" => 'services#chat', :as => :chat
+  match "/invite/:provider/:uid" => 'services#invite', :as => :invite
   match "/import/:provider" => "services#import", :as => :import
   
   mount Resque::Server, :at => "/resque"
