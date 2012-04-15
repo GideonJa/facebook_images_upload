@@ -12,7 +12,8 @@
         <% if photo.metadata['photo']['tags'] %>
           <% tag_names = [] %>
           <% photo.metadata['photo']['tags']['data'].each do |tag| %>
-            <% if tag['id'] %>
+            <% if tag['id'] && photo.service.uid == tag['id'] %>
+            <% elsif tag['id'] %>
               <% tag_names << link_to(tag['name'], 
                                       chat_path(:provider => photo.service.provider.name,
                                                 :uid => tag['id']) ) %>
