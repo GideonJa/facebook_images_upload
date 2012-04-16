@@ -50,7 +50,7 @@ class ServicesController < ApplicationController
       render :text => "chat with user=#{@service.user.name}"
     else
       @service = current_user.services.find_by_provider_id(@provider.id)
-      redirect_to service_invite_path(:service_id => @service.id, :uid => params[:uid])
+      redirect_to service_invite_path(:service_id => @service.id, :uid => params[:uid], :name => params[:name])
     end
   end
   
@@ -62,9 +62,21 @@ class ServicesController < ApplicationController
       redirect_to chat_path(:provider => @service.provider.name, :uid => params[:uid])
       return
     end
+  end
+  
+  def create_invitation
+    puts "service_id = #{params[:service_id]}"
+    @service = current_user.services.find(params[:service_id])
+    @invited_service = Service.find_by_provider_id_and_uid(@service.provider.id, params[:uid])
+    
+    if @invited_service
+      redirect_to chat_path(:provider => @service.provider.name, :uid => params[:uid])
+      return
+    end
     
     if @service
-      render :text => "invite uid=#{params[:uid]} from #{@service.provider.name}"
+      api = Koala::Facebook::API.new(@service.oauth_token)
+      api.put_wall_post(params[:message], {:name => "Example", :link => "http://www.example.com"}, params[:uid])
     end
   end
   

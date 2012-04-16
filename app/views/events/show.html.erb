@@ -16,7 +16,8 @@
             <% elsif tag['id'] %>
               <% tag_names << link_to(tag['name'], 
                                       chat_path(:provider => photo.service.provider.name,
-                                                :uid => tag['id']) ) %>
+                                                :uid => tag['id'],
+                                                :name => tag['name']) ) %>
             <% else %>
               <% tag_names << h(tag['name']) %>
             <% end %>

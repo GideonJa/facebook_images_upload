@@ -1,0 +1,6 @@
+<%# TODO: change copy %>
+<h2>Post an invitation on <%= params[:name] %>'s wall:</h2>
+<%= form_tag( service_create_invitation_path(:provider => params[:provider], :uid => params[:uid], :name => params[:name]), :method=>:post ) do %>
+  <p><%= text_area_tag :message, (params[:message] || "I'd like to invite you to Pixelmate!") %></p>
+  <p><%= submit_tag 'Submit' %></p>
+<% end %>

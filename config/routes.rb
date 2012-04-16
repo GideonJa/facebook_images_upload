@@ -6,6 +6,7 @@ FacebookImagesUpload::Application.routes.draw do
   resources :services do
     get 'import_status' => "services#import_status", :as => :import_status, :defaults => { :format => 'js' }
     get 'invite/:uid' => 'services#invite', :as => :invite
+    post 'invite/:uid' => 'services#create_invitation', :as => :create_invitation
   end
   
   match "/auth/:provider/callback" => "services#create"
