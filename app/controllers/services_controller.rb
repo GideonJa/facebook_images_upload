@@ -76,6 +76,7 @@ class ServicesController < ApplicationController
     
     if @service
       api = Koala::Facebook::API.new(@service.oauth_token)
+      # TODO: change link
       api.put_wall_post(params[:message], {:name => "Example", :link => "http://www.example.com"}, params[:uid])
     end
   end
