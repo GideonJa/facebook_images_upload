@@ -54,6 +54,7 @@ class ServicesController < ApplicationController
     end
   end
   
+  # GET /services/:service_id/invite/:uid
   def invite
     @service = current_user.services.find(params[:service_id])
     @invited_service = Service.find_by_provider_id_and_uid(@service.provider.id, params[:uid])
@@ -64,6 +65,7 @@ class ServicesController < ApplicationController
     end
   end
   
+  # POST /services/:service_id/invite/:uid
   def create_invitation
     puts "service_id = #{params[:service_id]}"
     @service = current_user.services.find(params[:service_id])
