@@ -30,6 +30,7 @@ class ServicesController < ApplicationController
       @service.update_attribute :import_started_at, Time.now
       if @provider.name == 'facebook'
         Resque.enqueue(FacebookImporter, @service.id) 
+        Resque.enqueue(FacebookFriendsUpdater, @service.id) 
       end
     end
 
