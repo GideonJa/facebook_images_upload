@@ -1,5 +1,6 @@
 require 'open-uri'
 
+# rake resque:work QUEUE='*'
 class FacebookImporter
   @queue = :import_queue
   
