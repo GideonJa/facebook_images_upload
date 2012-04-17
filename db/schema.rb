@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120326111159) do
+ActiveRecord::Schema.define(:version => 20120417061347) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20120326111159) do
     t.datetime "import_ended_at"
     t.integer  "import_total_photos"
     t.integer  "import_num_photos"
+    t.text     "metadata"
   end
 
   add_index "services", ["provider_id"], :name => "index_services_on_service_provider_id"
