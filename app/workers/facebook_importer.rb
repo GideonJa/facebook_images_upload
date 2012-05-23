@@ -24,12 +24,14 @@ class FacebookImporter
       api.get_connections('me', 'albums').each do |album|
         api.get_connections(album['id'], 'photos').each do |photo|
           unless user.photos.find_by_provider_uid(photo['id'])
+            io = open(photo['source'])
+            def io.original_filename; File.basename(base_uri.path); end
             user.photos.create(
               :event_id => user.events.first.id,
               :service_id => service.id,
               :provider_uid => photo['id'],
               :metadata => {'album' => album, 'photo' => photo},
-              :file => open(photo['source']) )
+              :file => io )
             num_photos += 1
             service.update_attribute :import_num_photos, num_photos
           end
